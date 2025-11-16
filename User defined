@@ -1,0 +1,40 @@
+AgeCheckException.java
+
+
+public class AgeCheckException extends Exception {
+    
+    // Constructor that takes a custom message
+    public AgeCheckException(String message) {
+        // Pass the message to the parent class (Exception)
+        super(message);
+    }
+}
+
+
+
+VotingApp.java
+
+public class VotingApp {
+    static void checkAge(int age) throws AgeCheckException {
+        if (age < 18) {
+            // Throw our custom exception
+            throw new AgeCheckException("Age is not valid for voting");
+        } else {
+            System.out.println("Welcome to vote");
+        }
+    }
+
+    // The main method to run the program
+    public static void main(String args[]) {
+        try {
+            // We call the method that can throw the exception
+            checkAge(13); // This will throw the exception
+            
+        } catch (Exception e) {
+            // We catch the exception here
+            System.out.println("Exception (handled): " + e.getMessage());
+        }
+
+        System.out.println("Voting app check completed...");
+    }
+}
