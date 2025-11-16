@@ -1,0 +1,42 @@
+
+public class MethodOverLoad { // Renamed from MethodOverLoad for convention
+
+
+    void calValue() {
+        int x = 20;
+        x = x * x;
+        // Corrected: x*x is the 'square' of x, not 'sqrt'
+        System.out.println("Square of 20 is: " + x);
+    }
+
+    /**
+     * Overloaded Method 2:
+     * One integer parameter. Calculates the cube.
+     */
+    void calValue(int y) {
+        int cube = y * y * y; // Store result in a new variable
+        System.out.println("Cube of " + y + " is: " + cube);
+    }
+
+    /**
+     * Overloaded Method 3:
+     * Two integer parameters. Calculates the product.
+     */
+    void calValue(int m, int n) {
+        int z = m * n;
+        System.out.println("Product of m and n is: " + z);
+    }
+
+    /**
+     * The main method is the entry point for the program.
+     * This was moved from your 'MOL' class to fix the error.
+     */
+    public static void main(String args[]) {
+        MethodOverLoad m = new MethodOverLoad(); // Use the class name
+        
+        // Call all three overloaded methods
+        m.calValue();
+        m.calValue(10); // This was missing in your main method call
+        m.calValue(10, 20);
+    }
+}
