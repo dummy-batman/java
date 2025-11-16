@@ -5,11 +5,10 @@ import java.awt.*;
 public class JListAndTreeDemo extends JFrame {
 
     public JListAndTreeDemo() {
-        // --- 1. Set up the main frame ---
+       
         setTitle("JList and JTree Demo");
         setSize(500, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        // Use a 1-row, 2-column grid layout to split the window
         setLayout(new GridLayout(1, 2, 10, 10)); // (rows, cols, hgap, vgap)
 
         // --- 2. Create the JList ---
