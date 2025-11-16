@@ -1,0 +1,85 @@
+import javax.swing.*;
+import javax.swing.tree.DefaultMutableTreeNode;
+import java.awt.*;
+
+/**
+ * A simple Swing application to demonstrate JList and JTree.
+ * The window is divided into two parts:
+ * - Left side: A JList of programming languages.
+ * - Right side: A JTree representing a simple folder structure.
+ */  
+public class JListAndTreeDemo extends JFrame {
+
+    public JListAndTreeDemo() {
+        // --- 1. Set up the main frame ---
+        setTitle("JList and JTree Demo");
+        setSize(500, 300);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // Use a 1-row, 2-column grid layout to split the window
+        setLayout(new GridLayout(1, 2, 10, 10)); // (rows, cols, hgap, vgap)
+
+        // --- 2. Create the JList ---
+        
+        // Data for the list
+        String[] languages = {"Java", "Python", "C++", "JavaScript", "Go", "Rust", "Swift"};
+        
+        // Create the JList
+        JList<String> languageList = new JList<>(languages);
+        languageList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // Only allow one item to be selected
+        
+        // Add the list to a scroll pane
+        JScrollPane listScrollPane = new JScrollPane(languageList);
+        listScrollPane.setBorder(BorderFactory.createTitledBorder("JList: Languages")); // Add a title
+
+        
+        // --- 3. Create the JTree ---
+        
+        // Create the root node
+        DefaultMutableTreeNode root = new DefaultMutableTreeNode("My Computer");
+        
+        // Create child nodes (folders)
+        DefaultMutableTreeNode driveC = new DefaultMutableTreeNode("Local Disk (C:)");
+        DefaultMutableTreeNode driveD = new DefaultMutableTreeNode("Data (D:)");
+        
+        // Add child nodes (files/folders) to C:
+        driveC.add(new DefaultMutableTreeNode("Program Files"));
+        driveC.add(new DefaultMutableTreeNode("Users"));
+        driveC.add(new DefaultMutableTreeNode("Windows"));
+        
+        // Add child nodes to D:
+        DefaultMutableTreeNode projects = new DefaultMutableTreeNode("Projects");
+        projects.add(new DefaultMutableTreeNode("MyWebApp.java"));
+        projects.add(new DefaultMutableTreeNode("Game.py"));
+        driveD.add(projects);
+        driveD.add(new DefaultMutableTreeNode("Photos"));
+        
+        // Add the drives to the root node
+        root.add(driveC);
+        root.add(driveD);
+        
+        // Create the JTree from the root node
+        JTree fileTree = new JTree(root);
+        
+        // Add the tree to a scroll pane
+        JScrollPane treeScrollPane = new JScrollPane(fileTree);
+        treeScrollPane.setBorder(BorderFactory.createTitledBorder("JTree: File System")); // Add a title
+
+        
+        // --- 4. Add components to the frame ---
+        add(listScrollPane);
+        add(treeScrollPane);
+
+        // Center the window on screen
+        setLocationRelativeTo(null);
+    }
+
+    public static void main(String[] args) {
+        // Ensure the GUI is created and updated on the Event Dispatch Thread (EDT)
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new JListAndTreeDemo().setVisible(true);
+            }
+        });
+    }
+}
