@@ -1,0 +1,33 @@
+import java.util.Scanner;
+
+public class QuadraticRoots {
+    public static void main(String[] args) {
+        // 1. Get input
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter a, b, and c:");
+        double a = sc.nextDouble();
+        double b = sc.nextDouble();
+        double c = sc.nextDouble();
+
+        // 2. Calculate discriminant
+        double d = b * b - 4 * a * c;
+
+        // 3. Check conditions for roots
+        if (d > 0) {
+            // Real and distinct roots
+            double r1 = (-b + Math.sqrt(d)) / (2 * a);
+            double r2 = (-b - Math.sqrt(d)) / (2 * a);
+            System.out.printf("Roots are real and distinct: %.2f and %.2f\n", r1, r2);
+        } else if (d == 0) {
+            // Real and equal root
+            double r1 = -b / (2 * a);
+            System.out.printf("Roots are real and equal: %.2f\n", r1);
+        } else {
+            // Complex roots
+            double real = -b / (2 * a);
+            double imag = Math.sqrt(-d) / (2 * a);
+            System.out.printf("Roots are complex: %.2f + i%.2f and %.2f - i%.2f\n", real, imag, real, imag);
+        }
+        sc.close();
+    }
+}
