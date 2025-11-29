@@ -1,0 +1,158 @@
+import java.awt.event.*;
+import javax.swing.*;
+
+class MyButtonHandler implements ActionListener {
+    // 3. THE LISTENER (The Logic)
+    public void actionPerformed(ActionEvent e) {
+        System.out.println("Button was clicked!");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // 1. THE SOURCE (The Component)
+        JButton btn = new JButton("Click Me");
+
+        // 2. THE DELEGATION (Registering the Listener)
+        // This line tells the button: "Delegate your clicks to MyButtonHandler"
+        btn.addActionListener(new MyButtonHandler());
+    }
+}
+____________________________________________________________________________
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+// 1. Implement KeyListener
+class MyKeyHandler implements KeyListener {
+
+    // 2. You MUST write all 3 methods (Standard Rule)
+    public void keyPressed(KeyEvent e) {
+        System.out.println("Key Pressed");
+    }
+
+    public void keyReleased(KeyEvent e) {
+         // You can leave this empty, but it MUST be here
+    }
+
+    public void keyTyped(KeyEvent e) {
+         // You can leave this empty, but it MUST be here
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame();
+        JTextField textField = new JTextField(20); // Source is usually a TextField
+
+        // 3. Register the Listener
+        // Note: It is addKEYListener, not addACTIONListener
+        textField.addKeyListener(new MyKeyHandler());
+
+        frame.add(textField);
+        frame.setSize(300, 200);
+        frame.setVisible(true);
+    }
+}
+--------------------------------------------------------------
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+// 1. Implement MouseListener
+class MyMouseHandler implements MouseListener {
+
+    // 2. YOU MUST WRITE ALL 5 METHODS
+    public void mouseClicked(MouseEvent e) {
+        System.out.println("Mouse Clicked at X: " + e.getX() + " Y: " + e.getY());
+    }
+
+    public void mouseEntered(MouseEvent e) {
+        System.out.println("Mouse Entered the area");
+    }
+
+    public void mouseExited(MouseEvent e) {
+        System.out.println("Mouse Left the area");
+    }
+
+    public void mousePressed(MouseEvent e) {
+        // Must be present, even if empty
+    }
+
+    public void mouseReleased(MouseEvent e) {
+        // Must be present, even if empty
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame();
+        JButton btn = new JButton("Hover or Click Me");
+
+        // 3. Register the Listener
+        btn.addMouseListener(new MyMouseHandler());
+
+        frame.add(btn);
+        frame.setSize(300, 300);
+        frame.setVisible(true);
+    }
+}
+----------------------------------------------------------------------
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class MouseTracker extends JFrame implements MouseMotionListener {
+
+    JLabel label;
+
+    MouseTracker() {
+        // Setup the Frame
+        setSize(400, 400);
+        setLayout(new FlowLayout());
+
+        label = new JLabel("Move the mouse...");
+        add(label);
+
+        // Register THIS class as the listener
+        addMouseMotionListener(this);
+
+        setVisible(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    // METHOD 1: Handles Moving (No button pressed)
+    public void mouseMoved(MouseEvent e) {
+        int x = e.getX();
+        int y = e.getY();
+        label.setText("Mouse is at: " + x + ", " + y);
+    }
+
+    // METHOD 2: Handles Dragging (Button pressed + Moving)
+    public void mouseDragged(MouseEvent e) {
+        label.setText("Dragging at: " + e.getX() + ", " + e.getY());
+    }
+
+    public static void main(String[] args) {
+        new MouseTracker();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------------------------------
